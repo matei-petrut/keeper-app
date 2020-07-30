@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import Grid from "@material-ui/core/Grid";
 import Header from "./Header";
 import Footer from "./Footer";
 import Note from "./Note";
 import CreateArea from "./CreateArea";
+
 
 function App() {
   const [notes, setNotes] = useState([]);
@@ -39,17 +41,19 @@ function App() {
     <div>
       <Header />
       <CreateArea onAdd={addNote} />
-      {notes.map((noteItem, index) => {
-        return (
-          <Note
-            key={index}
-            id={index}
-            title={noteItem[0]}
-            content={noteItem[1]}
-            onDelete={deleteNote}
-          />
-        );
-      })}
+      <Grid container justify="center" spacing={2}>
+        {notes.map((noteItem, index) => {
+          return (
+            <Note
+              key={index}
+              id={index}
+              title={noteItem[0]}
+              content={noteItem[1]}
+              onDelete={deleteNote}
+              />
+            );
+          })}
+      </Grid>
       <Footer />
     </div>
   );
