@@ -9,8 +9,18 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
-  cardStyles: {
-    backgroundColor: "#f9d56e"
+  headerStyles: {
+    backgroundColor: "#f5ba13",
+    fontFamily: "Montserrat",
+    fontSize: "3rem",
+    fontWeight: "200"
+  },
+  contentStyles: {
+    fontFamily: "Montserrat",
+    fontSize: "1.3rem"
+  },
+  buttonStyles: {
+    margin: "0 auto"
   }
 });
 
@@ -22,20 +32,32 @@ function Note(props) {
     props.onDelete(props.id);
   }
 
+  function handleHeaderClick() {
+    console.log("I got clicked!");
+  }
+
+  function checkLenght(value) {
+    if (value.length > 21)
+      return true;
+    else
+      return false;
+  }
+
   return (
-    <Grid item xs={6} lg={3}>
+    <Grid item xs={6} lg={2}>
       <Card>
         <CardHeader
-          className={classes.cardStyles}
+          onClick={handleHeaderClick}
+          className={classes.headerStyles}
           title={props.title}
         />
         <CardContent>
-          <Typography>
+          <Typography noWrap={checkLenght(props.content)} className={classes.contentStyles}>
             {props.content}
           </Typography>
         </CardContent>
         <CardActions>
-          <button onClick={handleClick}>
+          <button onClick={handleClick} className={classes.buttonStyles}>
             <DeleteIcon />
           </button>
         </CardActions>
